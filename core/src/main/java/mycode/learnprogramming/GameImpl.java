@@ -3,6 +3,7 @@ package mycode.learnprogramming;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -12,20 +13,14 @@ import javax.annotation.PreDestroy;
  * the implmentation of the Game
  */
 
+@Component
 public class GameImpl implements Game {
 
-    /**
-     * return a log for this class
-     */
     private static final Logger log = LoggerFactory.getLogger(GameImpl.class);
+    private final int guessCount;
 
-    // --fields--
-    @Autowired
+    // == fields ==
     private NumberGenerator numberGenerator;
-
-    @Autowired
-    @GuessCount
-    private int guessCount;
     private int guess;
     private int number;
     private int smallest;
@@ -33,16 +28,14 @@ public class GameImpl implements Game {
     private int remainingGuesses;
     private boolean isValidGuess = true;
 
-    /*
-    This constructor is for the Constructor based Dependency Injection method
-    // -- constructors --
-    public GameImpl(NumberGenerator numberGenerator) {
+    // == constructor ==
+    @Autowired
+    public GameImpl(NumberGenerator numberGenerator, @GuessCount int guessCount) {
         this.numberGenerator = numberGenerator;
+        this.guessCount = guessCount;
     }
-    */
 
     // == init ==
-
     /**
      * reset all the fields, run before starting of the game
      */
@@ -62,33 +55,17 @@ public class GameImpl implements Game {
         log.info("It is preDestory()");
     }
 
-
-    // --public methods--
-
-    /*
-    public void setNumberGenerator(NumberGenerator numberGenerator){
-        this.numberGenerator = numberGenerator;
-    }
-    */
-
-    /**
-     *
-     * @return the number that players are guessing
-     */
     @Override
     public int getNumber() {
         return number;
     }
 
-    /**
-     *
-     * @return the guess player made last time
-     */
     @Override
     public int getGuess() {
         return guess;
     }
 
+    @Override
     public int getGuessCount() {
         return guessCount;
     }
@@ -174,7 +151,7 @@ public class GameImpl implements Game {
     }
 
 
-    // -- private methods --
+    // == private methods ==
 
     /**
      * to check if the guess is within the biggest and smallest numbers

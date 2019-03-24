@@ -1,6 +1,7 @@
 package mycode.learnprogramming;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Random;
 
@@ -9,20 +10,23 @@ import java.util.Random;
  * a implementation for the NumberGenerator
  */
 
+@Component
 public class NumberGeneratorImpl implements NumberGenerator {
 
-    //-- fields  --
+    // == fields ==
     private final Random rand = new Random();
 
-    @Autowired
-    @MaxNumber
-    private int maxNumber;
+    private final int maxNumber;
+    private final int minNumber;
 
+    // == constructor ==
     @Autowired
-    @MinNumber
-    private int minNumber;
+    public NumberGeneratorImpl(@MaxNumber int maxNumber, @MinNumber int minNumber) {
+        this.maxNumber = maxNumber;
+        this.minNumber = minNumber;
+    }
 
-    // -- public methods --
+    // == public methods ==
     @Override
     public int next() {
         int bound = maxNumber-minNumber;
