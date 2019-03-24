@@ -13,7 +13,6 @@ public class MessageGeneratorImpl implements MessageGenerator {
     // == fields ==
     @Autowired
     private Game game;
-    private int guessCount = 10;
 
     // == init ==
     @PostConstruct
@@ -24,8 +23,8 @@ public class MessageGeneratorImpl implements MessageGenerator {
     // == public method ==
     @Override
     public String getMainMessage() {
-        return "Your guess range is between " + game.getBiggest() +
-                " and " + game.getSmallest() + ". Can you guess it?";
+        return "Your guess range is between " + game.getSmallest() +
+                " and " + game.getBiggest() + ". Can you guess it?";
     }
 
     @Override
@@ -36,14 +35,14 @@ public class MessageGeneratorImpl implements MessageGenerator {
             return "Sorry, You lost. The number was " + game.getNumber() + ". Better Luck Next Time!";
         }else if(!game.isValidNumberRange()){
             return "Invalid Number Range, Please input a valid number!";
-        }else if(game.getRemainingGuesses() == guessCount){
-            return "What is your first guess?";
+        }else if(game.getRemainingGuesses() == game.getGuessCount()){
+            return "What is your first guess? Your have " + game.getGuessCount() + " chances to guess the number.";
         }else {
             String resultMessage = "Lower";
             if(game.getGuess() < game.getNumber()){
                 resultMessage = "Higher";
             }
-            return resultMessage + ". You have " + game.getRemainingGuesses() + " guess left!";
+            return resultMessage + ". You have " + game.getRemainingGuesses() + " guesses left!";
         }
     }
 }

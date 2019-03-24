@@ -1,6 +1,6 @@
 package mycode.learnprogramming.console;
 
-import mycode.learnprogramming.AppConfig;
+import mycode.learnprogramming.config.AppConfig;
 import mycode.learnprogramming.MessageGenerator;
 import mycode.learnprogramming.NumberGenerator;
 import org.slf4j.Logger;

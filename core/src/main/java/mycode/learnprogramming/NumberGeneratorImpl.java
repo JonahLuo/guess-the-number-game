@@ -1,5 +1,7 @@
 package mycode.learnprogramming;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.Random;
 
 /**
@@ -12,7 +14,8 @@ public class NumberGeneratorImpl implements NumberGenerator {
     //-- fields  --
     private final Random rand = new Random();
 
-    private int MaxNumber = 100;
+    @Autowired
+    private int MaxNumber;
 
     // -- public methods --
     @Override

@@ -22,7 +22,9 @@ public class GameImpl implements Game {
     // --fields--
     @Autowired
     private NumberGenerator numberGenerator;
-    private int guessCount = 10;
+
+    @Autowired
+    private int guessCount;
     private int guess;
     private int number;
     private int smallest;
@@ -84,6 +86,10 @@ public class GameImpl implements Game {
     @Override
     public int getGuess() {
         return guess;
+    }
+
+    public int getGuessCount() {
+        return guessCount;
     }
 
     /**
