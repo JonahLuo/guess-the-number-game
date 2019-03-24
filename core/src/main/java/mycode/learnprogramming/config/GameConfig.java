@@ -1,5 +1,7 @@
 package mycode.learnprogramming.config;
 
+import mycode.learnprogramming.GuessCount;
+import mycode.learnprogramming.MaxNumber;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -7,16 +9,18 @@ import org.springframework.context.annotation.Configuration;
 public class GameConfig {
     // == fields ==
     private int guessCount = 8;
-    private int MaxNumber = 75;
+    private int maxNumber = 75;
 
     // == Beands Methods ==
     @Bean
-    int guessCount(){
+    @GuessCount
+    int myGuessCount(){
         return guessCount;
     }
 
     @Bean
-    int MaxNumber(){
-        return MaxNumber;
+    @MaxNumber
+    int myMaxNumber(){
+        return maxNumber;
     }
 }

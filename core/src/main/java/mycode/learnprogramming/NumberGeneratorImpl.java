@@ -15,16 +15,17 @@ public class NumberGeneratorImpl implements NumberGenerator {
     private final Random rand = new Random();
 
     @Autowired
-    private int MaxNumber;
+    @MaxNumber
+    private int maxNumber;
 
     // -- public methods --
     @Override
     public int next() {
-        return rand.nextInt(MaxNumber);
+        return rand.nextInt(maxNumber);
     }
 
     @Override
     public int getMaxNumber() {
-        return MaxNumber;
+        return maxNumber;
     }
 }
