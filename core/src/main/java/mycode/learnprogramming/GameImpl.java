@@ -1,7 +1,9 @@
 package mycode.learnprogramming;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,20 +15,25 @@ import javax.annotation.PreDestroy;
  * the implmentation of the Game
  */
 
+@Slf4j
+@Getter
 @Component
 public class GameImpl implements Game {
 
-    private static final Logger log = LoggerFactory.getLogger(GameImpl.class);
+    // == fields ==
     private final int guessCount;
 
-    // == fields ==
+    @Getter(AccessLevel.NONE)
     private NumberGenerator numberGenerator;
-    private int guess;
+
     private int number;
     private int smallest;
     private int biggest;
     private int remainingGuesses;
-    private boolean isValidGuess = true;
+    private boolean validNumberRange = true;
+
+    @Setter
+    private int guess;
 
     // == constructor ==
     @Autowired
@@ -55,58 +62,6 @@ public class GameImpl implements Game {
         log.info("It is preDestory()");
     }
 
-    @Override
-    public int getNumber() {
-        return number;
-    }
-
-    @Override
-    public int getGuess() {
-        return guess;
-    }
-
-    @Override
-    public int getGuessCount() {
-        return guessCount;
-    }
-
-    /**
-     *
-     * @param guess set the guess
-     */
-    @Override
-    public void setGuess(int guess) {
-        this.guess = guess;
-    }
-
-    /**
-     *
-     * @return the smallest number
-     */
-    @Override
-    public int getSmallest() {
-        return smallest;
-    }
-
-    /**
-     *
-     * @return get the biggest possible number
-     */
-    @Override
-    public int getBiggest() {
-        return biggest;
-    }
-
-    /**
-     *
-     * @return get the remaining guess times
-     */
-    @Override
-    public int getRemainingGuesses() {
-        return remainingGuesses;
-    }
-
-
     /**
      * Check if the the guess is valid, nad adjust the range to simplify the difficulty
      * And decrease the number of remaining guesses
@@ -115,21 +70,11 @@ public class GameImpl implements Game {
     public void check() {
         checkTheNumberRange();
 
-        if(isValidGuess){
+        if(validNumberRange){
             if(guess > number) biggest= guess-1;
             if(guess < number) smallest = guess+1;
+            remainingGuesses--;
         }
-
-        remainingGuesses--;
-    }
-
-    /**
-     *
-     * @return true if the guess is valid
-     */
-    @Override
-    public boolean isValidNumberRange() {
-        return isValidGuess;
     }
 
     /**
@@ -157,6 +102,6 @@ public class GameImpl implements Game {
      * to check if the guess is within the biggest and smallest numbers
      */
     private void checkTheNumberRange(){
-        isValidGuess = (guess <= biggest) && (guess >= smallest);
+        validNumberRange = (guess <= biggest) && (guess >= smallest);
     }
 }

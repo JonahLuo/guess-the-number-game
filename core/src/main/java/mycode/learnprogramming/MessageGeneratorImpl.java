@@ -1,16 +1,14 @@
 package mycode.learnprogramming;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
+@Slf4j
 @Component
 public class MessageGeneratorImpl implements MessageGenerator {
-
-    private final static Logger log = LoggerFactory.getLogger(MessageGeneratorImpl.class);
 
     // == fields ==
     private final Game game;
@@ -41,7 +39,7 @@ public class MessageGeneratorImpl implements MessageGenerator {
         }else if(game.isGameLost()){
             return "Sorry, You lost. The number was " + game.getNumber() + ". Better Luck Next Time!";
         }else if(!game.isValidNumberRange()){
-            return "Invalid Number Range, Please input a valid number!";
+            return "Invalid Number Range, Please input a valid number! You have " + game.getRemainingGuesses() + " guesses left!";
         }else if(game.getRemainingGuesses() == game.getGuessCount()){
             return "What is your first guess? Your have " + game.getGuessCount() + " chances to guess the number.";
         }else {
