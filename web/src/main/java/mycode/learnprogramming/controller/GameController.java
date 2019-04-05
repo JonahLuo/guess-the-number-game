@@ -3,7 +3,7 @@ package mycode.learnprogramming.controller;
 import lombok.extern.slf4j.Slf4j;
 import mycode.learnprogramming.service.GameService;
 import mycode.learnprogramming.util.AttributeNames;
-import mycode.learnprogramming.util.Mappings;
+import mycode.learnprogramming.util.GameMappings;
 import mycode.learnprogramming.util.ViewNames;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +25,7 @@ public class GameController {
     }
 
     // == request handler ==
-    @GetMapping(Mappings.PLAY)
+    @GetMapping(GameMappings.PLAY)
     public String play(Model model){
         model.addAttribute(AttributeNames.MAIN_MESSAGE, gameService.getMainMessage());
         model.addAttribute(AttributeNames.RESULT_MESSAGE, gameService.getResultMessage());
@@ -37,12 +37,18 @@ public class GameController {
         return ViewNames.PLAY;
     }
 
-    @PostMapping(Mappings.PLAY)
+    @PostMapping(GameMappings.PLAY)
     public String playProcess(@RequestParam int guess){
         log.info("guess = {}", guess);
         gameService.checkGuess(guess);
-        return Mappings.REDIRECT_PLAY;
+        return GameMappings.REDIRECT_PLAY;
     }
 
+    @GetMapping(GameMappings.RESTART)
+    public String restart(){
+        log.info("Reset Game");
+        gameService.reset();
+        return GameMappings.REDIRECT_PLAY;
+    }
 
 }
