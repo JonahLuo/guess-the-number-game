@@ -1,0 +1,9 @@
+<thlogic>
+    <attr sel="#headID"
+          th:replace="~{fragment/head :: headFragment}"/>
+    <attr sel="#click2play"
+          th:href="@{__${T(mycode.learnprogramming.util.GameMappings).PLAY}__}"
+          th:text="Play"/>
+    <attr sel="#footerID"
+          th:replace="~{fragment/footer :: footerFragment}"/>
+</thlogic>

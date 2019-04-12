@@ -1,17 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragment/head :: headFragment}">
+<html lang="en">
+<head id="headID">
     <meta charset="UTF-8">
     <title>Home</title>
 </head>
 <body>
     <div align="center">
         <h1>Welcome to Guess the Number Game</h1>
-        <h3><a th:href="@{__${T(mycode.learnprogramming.util.GameMappings).PLAY}__}"
-           th:text="Play">
+        <h3><a id="click2play" href="play.html">
             Click to play
         </a></h3>
-        <footer th:replace="~{fragment/footer :: footerFragment}"></footer>
+        <footer id="footerID"></footer>
     </div>
 
 </body>

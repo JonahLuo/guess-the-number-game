@@ -1,0 +1,12 @@
+<thlogic>
+    <attr sel="#headID"
+          th:replace="~{fragment/head :: headFragment}"/>
+    <attr sel="#footerID"
+          th:replace="~{fragment/footer :: footerFragment}"/>
+    <attr sel="#result-message"
+          th:text="${__${T(mycode.learnprogramming.util.AttributeNames).RESULT_MESSAGE}__}"/>
+    <attr sel="#restart-button"
+          th:onclick="|window.location.href = '@{__${T(mycode.learnprogramming.util.GameMappings).RESTART}__}'|"/>
+    <attr sel="#home-button"
+          th:onclick="|window.location.href = '@{__${T(mycode.learnprogramming.util.GameMappings).HOME}__}'|"/>
+</thlogic>

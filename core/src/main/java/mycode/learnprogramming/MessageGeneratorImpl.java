@@ -35,7 +35,7 @@ public class MessageGeneratorImpl implements MessageGenerator {
     @Override
     public String getResultMessgae() {
         if(game.isGameWon()){
-            return "Congrats, YOU WON!!";
+            return "Congrats, YOU WON!! The Number was " + game.getNumber() + "!";
         }else if(game.isGameLost()){
             return "Sorry, You lost. The number was " + game.getNumber() + ". Better Luck Next Time!";
         }else if(!game.isValidNumberRange()){
