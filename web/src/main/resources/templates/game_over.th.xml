@@ -1,12 +1,18 @@
 <thlogic>
     <attr sel="#headID"
           th:replace="~{fragment/head :: headFragment}"/>
+    <attr sel="#titleID"
+          th:text="#{game.title}"/>
+    <attr sel="#game-over"
+          th:text="#{game.gameOver}"/>
     <attr sel="#footerID"
           th:replace="~{fragment/footer :: footerFragment}"/>
     <attr sel="#result-message"
           th:text="${__${T(mycode.learnprogramming.util.AttributeNames).RESULT_MESSAGE}__}"/>
     <attr sel="#restart-button"
-          th:onclick="|window.location.href = '@{__${T(mycode.learnprogramming.util.GameMappings).RESTART}__}'|"/>
+          th:onclick="|window.location.href = '@{__${T(mycode.learnprogramming.util.GameMappings).RESTART}__}'|"
+          th:value="#{game.restartButton}"/>
     <attr sel="#home-button"
-          th:onclick="|window.location.href = '@{__${T(mycode.learnprogramming.util.GameMappings).HOME}__}'|"/>
+          th:onclick="|window.location.href = '@{__${T(mycode.learnprogramming.util.GameMappings).HOME}__}'|"
+          th:value="#{game.homeButton}"/>
 </thlogic>
