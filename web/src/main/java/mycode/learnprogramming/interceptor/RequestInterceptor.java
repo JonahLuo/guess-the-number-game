@@ -29,4 +29,5 @@ public class RequestInterceptor implements HandlerInterceptor {
         log.debug("afterCompletion method has been called, handler = {}", handler);
         log.debug("URL = {}", request.getRequestURL());
     }
+
 }
